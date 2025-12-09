@@ -1,0 +1,188 @@
+<div class="proveedor-container">
+
+    <div *ngIf="loading" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+
+    <span class="toast-message" *ngIf="message">{{ message }}</span>
+
+    <h1 class="title">Proveedores</h1>
+
+    <!-- CONTROLES SUPERIORES -->
+    <div class="top-controls">
+        <button class="btn-create" (click)="showFormProveedor = true">
+            Crear +
+        </button>
+
+        <div class="search-wrapper">
+            <input
+                type="text"
+                class="search-input"
+                placeholder="Buscar proveedor"
+                [(ngModel)]="searchTerm" />
+            <i class="fa fa-search search-icon"></i>
+        </div>
+    </div>
+
+    <!-- MENSAJE DE RESULTADOS DE BÚSQUEDA -->
+    <div class="search-result-message" *ngIf="searchTerm !== ''">
+        <span *ngIf="filteredProveedores.length > 0">
+            {{ filteredProveedores.length }} resultado(s) encontrado(s)
+        </span>
+        <span *ngIf="filteredProveedores.length === 0">
+            No se encontraron resultados para "{{ searchTerm }}"
+        </span>
+    </div>
+
+    <!-- MODAL PARA CREAR/EDITAR PROVEEDOR -->
+    <div class="form-modal" *ngIf="showFormProveedor">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>{{ proveedorEditando ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h2>
+            </div>
+
+            <form (ngSubmit)="crearProveedor()" class="form-content">
+
+                <!-- NOMBRE Y APELLIDO -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre *</label>
+                        <input
+                            type="text"
+                            [(ngModel)]="nuevoProveedor.nombre"
+                            name="nombre"
+                            placeholder="Ingrese nombre"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido *</label>
+                        <input
+                            type="text"
+                            [(ngModel)]="nuevoProveedor.apellido"
+                            name="apellido"
+                            placeholder="Ingrese apellido"
+                            required />
+                    </div>
+                </div>
+
+                <!-- EMPRESA -->
+                <div class="form-group">
+                    <label>Empresa *</label>
+                    <input
+                        type="text"
+                        [(ngModel)]="nuevoProveedor.empresa"
+                        name="empresa"
+                        placeholder="Nombre de la empresa"
+                        required />
+                </div>
+
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        [(ngModel)]="nuevoProveedor.email"
+                        name="email"
+                        placeholder="Ingresa correo" />
+                </div>
+
+                <!-- TELÉFONOS -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Teléfono *</label>
+                        <input
+                            type="tel"
+                            [(ngModel)]="nuevoProveedor.telefono"
+                            name="telefono"
+                            placeholder="Ingresa telefono "
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono Personal</label>
+                        <input
+                            type="tel"
+                            [(ngModel)]="nuevoProveedor.telefono_personal"
+                            name="telefono_personal"
+                            placeholder="Ingresa telefono" />
+                    </div>
+                </div>
+
+                <!-- BOTONES DE ACCIÓN DEL FORMULARIO -->
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" (click)="cancelCrearProveedor()">Cancelar</button>
+                    <button type="submit" class="btn-save" [disabled]="loading">
+                        {{ proveedorEditando ? 'Actualizar' : 'Guardar' }}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- LISTA DE PROVEEDORES -->
+    <div class="proveedores-list-vertical">
+        <div
+            *ngFor="let proveedor of filteredProveedores; let i = index"
+            class="proveedor-card-rectangular"
+            [class.expanded]="proveedor.expanded">
+
+            <!-- ENCABEZADO DEL PROVEEDOR -->
+            <div class="proveedor-header" (click)="toggleProveedor(proveedor)">
+                <div class="proveedor-nombre">
+                    <h3>{{ proveedor.nombre }} {{ proveedor.apellido }}</h3>
+                    <span class="proveedor-empresa" *ngIf="proveedor.empresa">{{ proveedor.empresa }}</span>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+
+            <!-- DETALLES EXPANDIBLES -->
+            <div class="proveedor-details-expandible" *ngIf="proveedor.expanded">
+
+              <!-- BOTONES DE ACCIÓN -->
+<div class="proveedor-actions">
+    <button class="icon-btn edit" (click)="editarProveedor(proveedor); $event.stopPropagation()" title="Editar">
+        <i class="fas fa-edit"></i>
+    </button>
+    <button class="icon-btn delete" (click)="eliminarProveedor(proveedor.id); $event.stopPropagation()" title="Eliminar">
+        <i class="fas fa-trash-alt"></i>
+    </button>
+</div>
+
+
+                <!-- EMPRESA -->
+                <div class="detail-row" *ngIf="proveedor.empresa">
+                    <span class="detail-label">Empresa:</span>
+                    <span class="detail-value">{{ proveedor.empresa }}</span>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="detail-row" *ngIf="proveedor.email">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">{{ proveedor.email }}</span>
+                </div>
+
+                <!-- TELÉFONO -->
+                <div class="detail-row" *ngIf="proveedor.telefono">
+                    <span class="detail-label">Teléfono:</span>
+                    <span class="detail-value">{{ proveedor.telefono }}</span>
+                </div>
+
+                <!-- TELÉFONO PERSONAL -->
+                <div class="detail-row" *ngIf="proveedor.telefono_personal">
+                    <span class="detail-label">Tel. Personal:</span>
+                    <span class="detail-value">{{ proveedor.telefono_personal }}</span>
+                </div>
+
+            </div> <!-- FIN DETALLES -->
+
+        </div> <!-- FIN CARD -->
+
+        <!-- MENSAJE CUANDO NO HAY PROVEEDORES -->
+        <div *ngIf="!loading && filteredProveedores.length === 0 && searchTerm === ''" class="empty-container">
+            <p class="empty-title">No hay proveedores registrados</p>
+            <p class="empty-subtitle">Crea uno nuevo para comenzar</p>
+        </div>
+    </div>
+
+</div>

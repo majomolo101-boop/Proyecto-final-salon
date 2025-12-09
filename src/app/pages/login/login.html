@@ -1,0 +1,91 @@
+<div class="login-wrapper">
+
+  <!-- IMAGEN -->
+  <div class="left-side">
+    <img src="./login.jpg" alt="Salón">
+  </div>
+
+  <!-- LOGIN -->
+  <div class="login-container">
+    <div class="login-content">
+
+      <!-- LOGO - ARRIBA -->
+      <div class="login-logo">
+        <img src="./logo_salon.png" alt="Logo">
+      </div>
+
+      <!-- TÍTULO -->
+      <h2 class="login-title">Iniciar Sesión</h2>
+
+      <!-- MENSAJE DE ERROR -->
+      <div class="error-message" *ngIf="errorMessage">
+        <i class="fa-solid fa-exclamation-circle"></i>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form class="login-form" (ngSubmit)="loginUser()">
+
+        <!-- INPUTS EN EL CENTRO (agrupados) -->
+        <div class="form-inputs-group">
+
+          <!-- USUARIO -->
+          <div class="form-group input-icon">
+            <i class="fa-solid fa-user"></i>
+            <input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              placeholder="Usuario"
+              (keypress)="onKeyPress($event)"
+              [disabled]="isLoading"
+              required>
+          </div>
+
+          <!-- CONTRASEÑA -->
+          <div class="form-group input-icon password-group">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Contraseña"
+              (keypress)="onKeyPress($event)"
+              [disabled]="isLoading"
+              required>
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              [disabled]="isLoading">
+              <i [class]="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- BOTÓN - ABAJO -->
+        <div class="form-button">
+          <button type="submit" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Ingresar</span>
+            <span *ngIf="isLoading" class="loading-spinner">
+              <i class="fa-solid fa-spinner fa-spin"></i>
+              Verificando...
+            </span>
+          </button>
+        </div>
+
+      </form>
+
+      <!-- CREDENCIALES DE PRUEBA (opcional - eliminar en producción) -->
+      <div class="demo-credentials">
+        <small>
+          <strong>Credenciales de prueba:</strong><br>
+          Usuario: admin | Contraseña: admin123
+        </small>
+      </div>
+
+    </div>
+  </div>
+
+</div>

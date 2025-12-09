@@ -1,0 +1,920 @@
+.cliente-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+/* MENSAJE TOAST */
+.toast-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  background: rgba(53, 85, 50, 0.75);
+  backdrop-filter: blur(6px);
+  color: white;
+  border-radius: 12px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  animation: fadeToast 0.8s ease, hideToast 2s ease 1.2s forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeToast {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hideToast {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* TOP CONTROLS */
+.top-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.btn-create {
+  background: #355532;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.btn-create:hover {
+  background: #2a4428;
+}
+
+/* BUSCADOR */
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.search-input {
+  font-family: inherit;
+  font-size: 0.9rem;
+  width: 100%;
+  min-width: 200px;
+  padding: 0.5rem 1rem 0.5rem 35px;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  background: #355532;
+}
+
+.search-input::placeholder {
+  color: #f5f7f5;
+}
+
+.search-input:focus {
+  outline: none;
+  background: #355532;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f5f7f5;
+  pointer-events: none;
+}
+
+/* MENSAJE DE RESULTADOS */
+.search-result-message {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 500;
+}
+
+/* ============================================ */
+/* FORMULARIO MODAL - CORREGIDO */
+/* ============================================ */
+.form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.form-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.form-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.form-header .cliente-nombre {
+  margin: 8px 0 0 0;
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-content {
+  padding: 1.5rem;
+}
+
+/* ✅ GRID CORREGIDO - DOS COLUMNAS */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* CAMPOS DEL FORMULARIO */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Campos que ocupan TODO EL ANCHO */
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #355532;
+  box-shadow: 0 0 0 3px rgba(53, 85, 50, 0.1);
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background: white url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23355532" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6"/></svg>') no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 35px;
+}
+
+/* OCULTAR RELOJ DE HORA */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* ============================================ */
+/* SERVICIOS EXTRA - CORREGIDO */
+/* ============================================ */
+.servicios-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.servicio-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.servicio-index {
+  position: absolute;
+  left: 12px;
+  font-weight: 600;
+  color: #355532;
+  font-size: 0.9rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.servicio-input-wrapper input {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem;
+  padding-right: 90px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* Si hay número, agregar padding izquierdo */
+.servicio-input-wrapper input[style*="padding-left"] {
+  padding-left: 35px;
+}
+
+.servicio-input-wrapper input:focus {
+  border-color: #355532;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(53, 85, 50, 0.1);
+}
+
+.btn-add,
+.btn-remove {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: #355532;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.btn-add {
+  right: 8px;
+}
+
+.btn-add:hover {
+  color: #2a4428;
+  transform: scale(1.1);
+}
+
+.btn-remove {
+  right: 44px;
+}
+
+.btn-remove:hover {
+  color: #dc2626;
+  transform: scale(1.1);
+}
+
+/* ============================================ */
+/* ACCIONES DEL FORMULARIO */
+/* ============================================ */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.form-actions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+}
+
+.btn-save {
+  background: #166534;
+  color: white;
+}
+
+.btn-save:hover {
+  background: #14532d;
+  transform: translateY(-1px);
+}
+
+/* ============================================ */
+/* EMPTY STATE */
+/* ============================================ */
+.empty-state {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.empty-subtitle {
+  color: #777;
+  font-size: 1rem;
+}
+
+/* ============================================ */
+/* LISTA DE CLIENTES */
+/* ============================================ */
+.clients-list {
+  margin-top: 2rem;
+}
+
+.client-card {
+  position: relative;
+  background: #CDCDBC;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.client-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.client-card.expanded {
+  background: #d2d2c6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* RESUMEN DEL CLIENTE */
+.client-summary {
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.client-summary:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.client-summary h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.3rem 0;
+}
+
+.client-summary p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.client-summary p strong {
+  font-weight: 500;
+  color: #374151;
+}
+
+/* DETALLES EXPANDIDOS */
+.client-details {
+  position: relative;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding-bottom: 80px !important;
+  border-top: 1px solid #b8b8a8;
+  background: #d9d9c9;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ICONOS EDITAR/ELIMINAR - ESQUINA SUPERIOR DERECHA */
+.actions-icons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #000000;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+  color: #355532;
+}
+
+/* BOTÓN PAGOS - ESQUINA INFERIOR DERECHA */
+.btn-pagos {
+  position: absolute !important;
+  bottom: 15px;
+  right: 15px;
+  background: #355532;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(53, 85, 50, 0.3);
+
+  i {
+    font-size: 16px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: #2a4428;
+    box-shadow: 0 4px 12px rgba(53, 85, 50, 0.4);
+  }
+}
+
+/* FILAS DE DETALLES */
+.detail {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detail:last-of-type {
+  border-bottom: none;
+}
+
+.detail span {
+  font-weight: 600;
+  color: #374151;
+  min-width: 150px;
+}
+
+.detail ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  flex: 1;
+  list-style-type: none;
+}
+
+.detail li {
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+}
+
+/* ============================================ */
+/* MODALES DE PAGOS */
+/* ============================================ */
+.pagos-container,
+.nuevo-pago-container,
+.monto-total-container {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.nuevo-pago-container {
+  max-width: 550px;
+}
+
+.monto-total-container {
+  max-width: 500px;
+}
+
+.pagos-content,
+.monto-total-content {
+  padding: 30px;
+}
+
+/* MONTO TOTAL */
+.total-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.input-total {
+  flex: 1;
+  padding: 20px 24px;
+  border: 3px solid #10b981;
+  border-radius: 12px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: right;
+  background: white;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.moneda {
+  font-size: 32px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+/* RESUMEN DE PAGO */
+.resumen-pago {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+
+  .resumen-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &.restante {
+      border-top: 2px solid #e5e7eb;
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+  }
+
+  .resumen-label {
+    font-size: 16px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .resumen-valor {
+    font-size: 26px;
+    font-weight: 700;
+
+    &.pagado {
+      color: #10b981;
+    }
+
+    &.restante-valor {
+      color: #dc2626;
+    }
+  }
+
+  .estado-badge {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 15px;
+
+    &.sin-pagar {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    &.anticipo {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    &.en-proceso {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    &.pagado {
+      background: #d1fae5;
+      color: #059669;
+    }
+  }
+}
+
+/* BOTONES DE ACCIÓN */
+.pagos-botones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.btn-accion {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 15px;
+
+  i {
+    font-size: 36px;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.anticipo {
+    border-color: #f59e0b;
+    color: #f59e0b;
+
+    &:hover:not(:disabled) {
+      background: #fef3c7;
+    }
+  }
+
+  &.pago {
+    border-color: #10b981;
+    color: #10b981;
+
+    &:hover:not(:disabled) {
+      background: #d1fae5;
+    }
+  }
+}
+
+/* LISTA DE PAGOS */
+.pagos-lista {
+  margin-top: 30px;
+
+  h3 {
+    font-size: 18px;
+    color: #1f2937;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+}
+
+.pago-item {
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-left: 4px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 18px;
+  padding-right: 90px;
+  margin-bottom: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &.anticipo {
+    border-left-color: #f59e0b;
+  }
+
+  &.pago {
+    border-left-color: #10b981;
+  }
+
+  &:hover {
+    border-color: #355532;
+    box-shadow: 0 4px 12px rgba(53, 85, 50, 0.15);
+  }
+}
+
+.pago-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.pago-titulo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pago-tipo-badge {
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.pago-metodo {
+  display: inline-block;
+  padding: 3px 10px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  width: fit-content;
+}
+
+.pago-fecha {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.pago-monto {
+  font-size: 22px;
+  font-weight: 800;
+  color: #355532;
+}
+
+.pago-descripcion {
+  margin: 12px 0 0 0;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.6;
+  border-left: 3px solid #e5e7eb;
+}
+
+.pago-acciones {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar-pago,
+.btn-eliminar-pago {
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-editar-pago {
+  background: #f0f9ff;
+  color: #3b82f6;
+
+  &:hover {
+    background: #3b82f6;
+    color: white;
+  }
+}
+
+.btn-eliminar-pago {
+  background: #fee2e2;
+  color: #dc2626;
+
+  &:hover {
+    background: #dc2626;
+    color: white;
+  }
+}
+
+.empty-pagos {
+  text-align: center;
+  padding: 50px 20px;
+  color: #9ca3af;
+
+  i {
+    font-size: 56px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  small {
+    font-size: 14px;
+    color: #d1d5db;
+  }
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-controls {
+    flex-wrap: wrap;
+  }
+
+  .search-wrapper {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .pagos-botones {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+

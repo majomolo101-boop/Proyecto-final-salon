@@ -1,0 +1,370 @@
+/* ========================================
+   CONTENEDOR PRINCIPAL
+======================================== */
+.login-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   LADO IZQUIERDO - IMAGEN
+======================================== */
+.left-side {
+  flex: 1;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-side img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================
+   LADO DERECHO - LOGIN
+======================================== */
+.login-container {
+  width: 400px;
+  height: 100vh;
+  padding: 20px 40px;
+  background-color: #d8d5c8;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Contenedor interno */
+.login-content {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+/* ========================================
+   LOGO - ARRIBA
+======================================== */
+.login-logo {
+  width: 120px;
+  height: 120px;
+  margin-top: 30px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.login-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* ========================================
+   TÍTULO
+======================================== */
+.login-title {
+  margin: 100px 0 0 0;
+  font-size: 22px;
+  color: #1f2937;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   MENSAJE DE ERROR
+======================================== */
+.error-message {
+  width: 100%;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dc2626;
+  font-size: 13px;
+  animation: slideDown 0.3s ease, shake 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-message i {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Animación shake para el formulario */
+.login-form.shake {
+  animation: shake 0.4s ease;
+}
+
+/* ========================================
+   FORMULARIO - EN MEDIO Y ABAJO
+======================================== */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+/* Contenedor de inputs (usuario y contraseña) */
+.form-inputs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.form-group {
+  width: 100%;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.input-icon {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #5a5a5a;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+input {
+  width: 100%;
+  height: 45px;
+  padding: 0 45px 0 38px;
+  border-radius: 10px;
+  border: none;
+  background-color: #e8e6e3;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+input:focus {
+  outline: 2px solid #2f582f;
+  background-color: #fff;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   TOGGLE CONTRASEÑA
+======================================== */
+.password-group {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #5a5a5a;
+  cursor: pointer;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 2;
+}
+
+.toggle-password:hover {
+  color: #2f582f;
+}
+
+.toggle-password:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-password i {
+  font-size: 14px;
+}
+
+/* ========================================
+   BOTÓN - ABAJO
+======================================== */
+.form-button {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 150px;
+  flex-shrink: 0;
+}
+
+button[type="submit"] {
+  width: 100%;
+  height: 45px;
+  background-color: #2f582f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #244a24;
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loading-spinner i {
+  font-size: 16px;
+}
+
+/* ========================================
+   CREDENCIALES DE PRUEBA (OPCIONAL)
+======================================== */
+.demo-credentials {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #6b7280;
+}
+
+.demo-credentials small {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.demo-credentials strong {
+  color: #374151;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media screen and (max-width: 768px) {
+  .left-side {
+    display: none;
+  }
+
+  .login-container {
+    width: 100vw;
+  }
+
+  .form-button {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-title {
+    margin-top: 60px;
+    font-size: 20px;
+  }
+
+  .login-logo {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+
+  input {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    height: 42px;
+    font-size: 16px;
+  }
+}

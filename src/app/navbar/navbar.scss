@@ -1,0 +1,165 @@
+//SIDEBAR
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: #CDCDBC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;         /* deja espacio para el hamburguesero */
+  transition: width 0.3s;
+  overflow: hidden;
+  z-index: 999;
+}
+
+/* SIDEBAR COLAPSADA */
+.sidebar.collapsed {
+  width: 70px;
+}
+
+//BOTÓN HAMBURGUESA
+.collapse-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.collapse-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #010101;
+  border-radius: 2px;
+}
+
+//LOGO
+.logo {
+  margin-bottom: 40px;
+}
+
+.logo img {
+  width: 120px;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.sidebar.collapsed .logo img {
+  width: 50px;
+}
+
+//MENÚ PRINCIPAL
+.menu {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.menu li {
+  width: 100%;
+  position: relative;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000000;      /* Texto  */
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.menu a:hover {
+  background: #355532;
+  color: #ffffff;         /* texto blanco */
+}
+
+//ICONOS Y TEXTO DEL MENÚ
+.icon {
+  font-size: 18px;
+  margin-right: 10px;
+  min-width: 18px;
+  text-align: center;
+  color: #000000;      /* Icono negro */
+}
+
+.menu a:hover .icon {
+  color: #ffffff;         /* iconos blancos */
+}
+
+
+.sidebar.collapsed .text {
+  display: none;
+}
+
+.text {
+  font-size: 14px;     /* tamaño más pequeño */
+}
+
+
+
+//MENÚ SECUNDARIO ABAJO
+.secondary-menu {
+  margin-top: auto;
+}
+
+
+//RESPONSIVIDAD
+@media (max-width: 480px) { // móviles pequeños
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;                // siempre visible
+    width: 200px;
+    height: 100vh;
+    z-index: 9999;
+    transition: left 0.3s ease-in-out;
+  }
+
+  .collapse-btn {
+    top: 10px;
+    left: 10px;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  .menu a {
+    padding: 12px 20px;
+  }
+}
+
+
+// Estilo especial para el link de logout
+.logout-link {
+  cursor: pointer;
+  color: #dc2626 !important;
+}
+
+.logout-link:hover {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+.logout-link:hover .icon {
+  color: #ffffff !important;
+}
+
+.logout-link .icon {
+  color: #dc2626;
+}

@@ -1,0 +1,46 @@
+<div class="container-calendario">
+
+  <!-- Header mes/año con flechas -->
+  <div class="header-calendario">
+    <button class="btn-nav" (click)="mesAnterior()">&lt;</button>
+    <h2>{{ nombreMes }} {{ anio }}</h2>
+    <button class="btn-nav" (click)="mesSiguiente()">&gt;</button>
+  </div>
+
+  <!-- Días de la semana -->
+  <div class="dias-semana">
+    <div *ngFor="let d of ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']">{{d}}</div>
+  </div>
+
+  <!-- Grid de días -->
+  <div class="dias-grid">
+    <div class="dia vacio" *ngFor="let v of diasVaciosInicio"></div>
+    <div
+      class="dia"
+      *ngFor="let dia of diasDelMes"
+      [class.hoy]="esHoy(dia)"
+      [class.reservado]="dia.reservado"
+      [class.seleccionado]="dia.seleccionado"
+      (click)="seleccionarDia(dia)">
+      {{ dia.numero }}
+    </div>
+  </div>
+
+</div>
+
+<!-- Contenedor separado para el resumen -->
+<div class="resumen-dia" *ngIf="diaSeleccionado">
+  <h3>Reserva:</h3>
+
+  <p *ngIf="diaSeleccionado.listaReservaciones.length === 0">
+    No hay reservaciones.
+  </p>
+
+  <div *ngIf="diaSeleccionado.listaReservaciones.length > 0">
+    <div *ngFor="let r of diaSeleccionado.listaReservaciones" class="reserva-item">
+      <p><strong>Cliente:</strong> {{ r.cliente }}</p>
+      <p><strong>Hora:</strong> {{ r.hora }}</p>
+    </div>
+  </div>
+</div>
+

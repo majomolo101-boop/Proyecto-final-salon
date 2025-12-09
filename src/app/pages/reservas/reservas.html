@@ -1,0 +1,33 @@
+<div class="reservas-container">
+  <div class="content">
+    <div class="header">
+      <h1 class="title">Reservas</h1>
+      <div class="pending-count">
+        Pendientes: {{ pendingCount }}
+      </div>
+    </div>
+
+
+
+   <!-- Estado vacío -->
+<div class="empty-state" *ngIf="reservations.length === 0">
+  <p class="empty-title">No hay reservaciones registradas</p>
+  <p class="empty-subtitle">Crea una nueva reservación para comenzar</p>
+</div>
+
+<!-- Listado de reservas por mes -->
+<div *ngIf="reservations.length > 0">
+  <div *ngFor="let mesGroup of objectEntries(groupedByMonth)">
+    <div class="month-group">
+      <h2 class="month-title">{{ mesGroup[0] }}</h2>
+      <div class="reservas-list">
+        <div *ngFor="let reservation of mesGroup[1]" class="reserva-card">
+          <h3 class="reserva-name">{{ reservation.name }} {{ reservation.apellido }}</h3>
+          <p><span class="label">Tipo de evento:</span> {{ reservation.tipo }}</p>
+          <p><span class="label">Fecha:</span> {{ reservation.fecha }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

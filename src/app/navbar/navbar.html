@@ -1,0 +1,34 @@
+<nav [class.collapsed]="isCollapsed" class="sidebar">
+
+  <!-- BOTÓN HAMBURGUESA -->
+  <button class="collapse-btn" (click)="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="./logo_salon.png" alt="Logo">
+  </div>
+
+  <!-- MENÚ PRINCIPAL -->
+  <ul class="menu">
+    <li><a routerLink="/inicio"><span class="icon"><i class="fas fa-home"></i></span><span class="text">Inicio</span></a></li>
+    <li><a routerLink="/reservas"><span class="icon"><i class="fas fa-calendar-check"></i></span><span class="text">Reservas</span></a></li>
+    <li><a routerLink="/calendario"><span class="icon"><i class="fas fa-calendar"></i></span><span class="text">Calendario</span></a></li>
+    <li><a routerLink="/clientes"><span class="icon"><i class="fas fa-users"></i></span><span class="text">Clientes</span></a></li>
+    <li><a routerLink="/banqueteros"><span class="icon"><i class="fas fa-utensils"></i></span><span class="text">Banqueteros</span></a></li>
+    <li><a routerLink="/proveedores"><span class="icon"><i class="fas fa-user-tie"></i></span><span class="text">Proveedores</span></a></li>
+  </ul>
+
+  <!-- MENÚ SECUNDARIO -->
+  <ul class="menu secondary-menu">
+    <li>
+      <a class="logout-link" (click)="logout()">
+        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="text">Cerrar sesión</span>
+      </a>
+    </li>
+  </ul>
+</nav>

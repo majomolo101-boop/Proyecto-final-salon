@@ -1,0 +1,44 @@
+//FONDO COMPLETO
+/* FONDO COMPLETO con sidebar adaptable */
+.inicio-wrapper {
+  position: fixed;            /* fija la imagen en toda la pantalla */
+  top: 0;
+  left: 0;                    /* empieza desde el borde izquierdo */
+  right: 0;
+  bottom: 0;                  /* ocupa toda la altura */
+
+  background-image: url('https://lh3.googleusercontent.com/p/AF1QipPSHxtBv29ValWKHnYtswPK8xkvXvrVv9gYnfCn=s1360-w1360-h1020-rw');
+  background-size: cover;     /* cubre toda el área */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;    /* centra contenido horizontalmente */
+  align-items: center;        /* centra contenido verticalmente */
+
+  z-index: -1;                /* para que el navbar quede arriba */
+}
+
+
+
+.reloj {
+  position: fixed;    /* Para fijarlo en pantalla */
+  bottom: 20px;       /* Distancia desde abajo */
+  right: 20px;        /* Distancia desde la derecha */
+  text-align: right;
+}
+
+.hora {
+  font-size: 70px;    /* tamaño de la hora */
+  margin: 0;
+  font-weight: bold;
+  color: white;
+}
+
+.fecha {
+  font-size: 40px;    /* aumentado de 24px a 40px */
+  margin-top: 15px;   /* un poco más de separación */
+  text-transform: capitalize;
+  color: white;
+  font-weight: 300;   /* opcional: más visible */
+}
